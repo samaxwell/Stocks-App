@@ -1,15 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StocksService } from './services/stocks.service';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SummaryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [StocksService],
   bootstrap: [AppComponent]
