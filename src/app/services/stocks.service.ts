@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http }  from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 let stocks: Array<string> = ['AAPL', 'GOOG', 'FB', 'AMZN', 'TWTR'];
 let service: string = 'https://angular2-in-action-api.herokuapp.com';
@@ -11,14 +11,13 @@ export interface StockInterface {
   changeInPercent: number;
 }
 
-
 @Injectable()
 export class StocksService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) {}
 
   get() {
-    return stocks.slice();
+    return stocks;
   }
 
   add(stock) {
@@ -33,7 +32,7 @@ export class StocksService {
 
   load(symbols) {
     if (symbols) {
-      return this.http.get(service + '/stocks/snapshot?symbols=' + symbols.join());
+      return this.http.get<Array<StockInterface>>(service + '/stocks/snapshot?symbols=' + symbols.join());
     }
   }
 }
